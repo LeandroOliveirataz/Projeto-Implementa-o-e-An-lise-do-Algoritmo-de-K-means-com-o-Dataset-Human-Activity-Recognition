@@ -1,6 +1,6 @@
 # Definindo o conteúdo do README.md
 readme_content = """
-# Relatório Técnico: Análise e Modelagem de Dados de Influenciadores do Instagram com Regressão Linear
+# Relatório Técnico: Reconhecimento de Atividades Humanas com K-means
 
 **Nome do Residente:** Leandro de Oliveira e Sumaia Suzart Argôlo Nunesmaia  
 **Data de Entrega:** 27/11/2024  
@@ -8,82 +8,71 @@ readme_content = """
 
 ## Resumo
 
-Este projeto tem como objetivo desenvolver um modelo preditivo para a taxa de engajamento de influenciadores do Instagram, utilizando técnicas de regressão linear. O script `main2.py` explora dados como seguidores, postagens e pontuação de influência para prever a taxa de engajamento a partir de um conjunto de dados preexistente. São implementados três modelos principais: Regressão Linear Simples, Regressão Lasso (L1) e Regressão Ridge (L2). A análise avalia os modelos por meio de métricas como Erro Médio Absoluto (MAE), Erro Quadrático Médio (MSE) e Coeficiente de Determinação (R²).
+Este projeto tem como objetivo aplicar o algoritmo de K-means para o reconhecimento de atividades humanas com base em um conjunto de dados de sensores. O script `main.py` implementa a técnica de clustering não supervisionado para identificar padrões nas atividades de um grupo de pessoas. São realizadas análises para determinar o número ideal de clusters utilizando os métodos do cotovelo e o silhouette score. Além disso, são aplicadas técnicas de normalização para garantir que as variáveis influenciem o modelo de forma equilibrada. O modelo final é validado com métricas de avaliação e visualizações para entender a coesão e separação dos clusters formados.
 
 ## Introdução
 
-A análise de influenciadores é cada vez mais relevante para o marketing digital. Este projeto visa compreender as variáveis que mais influenciam a taxa de engajamento, um indicador fundamental para medir o impacto de um influenciador. As técnicas de regressão linear são usadas para entender as relações entre variáveis e prever a taxa de engajamento com base em dados históricos.
+Com o avanço da tecnologia de sensores, o reconhecimento de atividades humanas se tornou uma área importante de estudo em diversas aplicações, como saúde, segurança e monitoramento. Este projeto utiliza o algoritmo K-means para identificar padrões de comportamento a partir de dados de sensores, com o objetivo de classificar as atividades realizadas por um indivíduo. O K-means é uma técnica de clustering que divide os dados em grupos com base em suas características semelhantes.
 
 ### Conjunto de Dados
-LINK DADOS: https://archive.ics.uci.edu/dataset/240/human+activity+recognition+using+smartphones
+LINK DOS DADOS:https://archive.ics.uci.edu/dataset/240/human+activity+recognition+using+smartphones
 
-O conjunto de dados utilizado neste projeto contém as seguintes variáveis:
-- **rank:** Rank do influenciador.
-- **channel_info:** Nome do influenciador.
-- **influence_score:** Pontuação de influência do influenciador.
-- **posts:** Número de postagens.
-- **followers:** Número de seguidores.
-- **avg_likes:** Média de curtidas por postagem.
-- **60_day_eng_rate:** Taxa de engajamento nos últimos 60 dias.
-- **new_post_avg_like:** Média de curtidas das novas postagens.
-- **total_likes:** Total de curtidas acumuladas.
-- **country:** País de origem do influenciador.
+O conjunto de dados utilizado contém informações sobre as atividades humanas registradas por sensores. As variáveis mais relevantes incluem:
+- **X, Y, Z (acelerômetro):** Dados de aceleração nas direções X, Y e Z.
+- **atividade:** A classe de atividade que o indivíduo está realizando (por exemplo, caminhada, corrida, descanso, etc.).
+- **tempo:** Um timestamp ou índice relacionado à sequência de dados.
 
-Além disso, a coluna **country** foi transformada em um valor numérico representando continentes.
+O conjunto de dados pode ter múltiplas variáveis que capturam as atividades em diferentes dimensões. Para garantir um bom desempenho do algoritmo, é necessário aplicar técnicas de pré-processamento, como normalização, e técnicas de redução de dimensionalidade, se necessário.
 
 ## Metodologia
 
-### Análise Exploratória
+### Análise Exploratória de Dados (AED)
 
-Foram analisadas distribuições de dados e possíveis correlações entre variáveis. Gráficos de dispersão foram gerados para examinar a relação entre seguidores e taxa de engajamento, e mapas de calor de correlação ajudaram a identificar variáveis com maior influência sobre a variável alvo.
+A análise exploratória foi conduzida para entender a distribuição dos dados e suas possíveis correlações. Gráficos de dispersão e histogramas foram gerados para examinar as relações entre as variáveis. Mapas de calor de correlação ajudaram a identificar variáveis com maior influência sobre a formação dos clusters.
 
 ### Implementação do Algoritmo
 
-O script implementa três modelos principais de regressão:
+O algoritmo K-means foi implementado utilizando a biblioteca Scikit-Learn. Para garantir uma inicialização eficiente dos centróides, utilizamos o método K-means++, que ajuda a reduzir o risco de convergência para um mínimo local.
 
-1. **Regressão Linear Simples**
-2. **Regressão Lasso (L1)** com regularização para redução de variáveis irrelevantes.
-3. **Regressão Ridge (L2)** para atenuação de colinearidades entre variáveis.
-
-A normalização das variáveis foi realizada com o `StandardScaler`, e a transformação da coluna **country** facilitou a análise. Dividimos os dados em conjuntos de treino e teste na proporção de 80/20.
+Antes de aplicar o algoritmo, os dados foram normalizados usando o `StandardScaler`, garantindo que todas as variáveis contribuam igualmente para a formação dos clusters. A escolha do número de clusters, K, foi realizada com base na análise do método do cotovelo e no cálculo do silhouette score.
 
 ### Validação e Ajuste de Hiperparâmetros
 
-Para selecionar os melhores hiperparâmetros, utilizamos validação cruzada. As métricas de erro e ajuste dos modelos foram calculadas em cada etapa para garantir consistência e robustez nos resultados.
+Para garantir a robustez e a qualidade do modelo, foi utilizado o método do cotovelo para determinar o número ideal de clusters. Além disso, o silhouette score foi calculado para avaliar a coesão e a separação dos clusters formados, ajudando a identificar a qualidade dos agrupamentos.
 
 ## Resultados
 
 ### Métricas de Avaliação
 
-Após a implementação do modelo kNN, as seguintes métricas foram obtidas:
+Após a execução do algoritmo K-means, as seguintes métricas foram obtidas:
 
-- **MAE:** [Valor MAE]
-- **MSE:** [Valor MSE]
-- **RMSE:** [Valor RMSE]
-- **R²:** [Valor R²]
+- **Soma das Distâncias ao Quadrado (Inércia):** Mede o quão bem os pontos estão agrupados ao redor dos centróides.
+- **Silhouette Score:** Avalia a coesão e separação dos clusters, com valores próximos de 1 indicando bons clusters.
+- **Número de Clusters (K):** O valor ideal de K foi selecionado com base na análise do cotovelo e do silhouette score.
 
 ### Visualizações
 
-- **Distribuição da Taxa de Engajamento:** Histograma que mostra a distribuição da variável `60_day_eng_rate`.
-- **Relação entre Seguidores e Taxa de Engajamento:** Gráfico de dispersão entre `followers` e `60_day_eng_rate`.
-- **Mapa de Correlação:** Heatmap das correlações entre variáveis.
+- **Método do Cotovelo:** Gráfico que mostra a relação entre o número de clusters e a soma das distâncias ao quadrado (inércia), para identificar o ponto de inflexão.
+- **Silhouette Score:** Gráfico que ilustra a qualidade dos clusters, permitindo a análise da separação entre eles.
+- **Distribuição dos Clusters:** Gráfico de dispersão dos clusters formados, com a redução de dimensionalidade utilizando PCA, se necessário.
 
 ```python
-# Exemplo de gráfico
 # Exemplo de visualização em Python
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Gráfico de dispersão entre 'followers' e 'avg_likes'
-plt.figure(figsize=(10, 5))
-sns.scatterplot(x='followers', y='avg_likes', hue='60_day_eng_rate', data=df)
-plt.title('Relação entre Seguidores e Média de Curtidas')
-plt.xlabel('Followers')
-plt.ylabel('Avg Likes')
+# Gráfico do Método do Cotovelo
+plt.figure(figsize=(10, 6))
+plt.plot(range(1, 11), inertia_values, marker='o')
+plt.title('Método do Cotovelo')
+plt.xlabel('Número de Clusters')
+plt.ylabel('Inércia')
 plt.show()
 
-# Mapa de correlação
-plt.figure(figsize=(10, 8))
-sns.heatmap(df.corr(), annot=True, cmap="YlGnBu")
-plt.title('Mapa de Correlação das Variáveis')
+# Gráfico de Silhouette Score
+plt.figure(figsize=(10, 6))
+plt.plot(range(2, 11), silhouette_scores, marker='o')
+plt.title('Silhouette Score por Número de Clusters')
+plt.xlabel('Número de Clusters')
+plt.ylabel('Silhouette Score')
 plt.show()
