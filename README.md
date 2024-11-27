@@ -1,6 +1,6 @@
 # Definindo o conteúdo do README.md
 readme_content = """
-# Relatório Técnico: Reconhecimento de Atividades Humanas com K-means
+# Relatório Técnico: Implementa-o-e-An-lise-do-Algoritmo-de-K-means-com-o-Dataset-Human-Activity-Recognition
 
 **Nome do Residente:** Leandro de Oliveira e Sumaia Suzart Argôlo Nunesmaia  
 **Data de Entrega:** 27/11/2024  
