@@ -15,6 +15,7 @@ Este projeto tem como objetivo desenvolver um modelo preditivo para a taxa de en
 A análise de influenciadores é cada vez mais relevante para o marketing digital. Este projeto visa compreender as variáveis que mais influenciam a taxa de engajamento, um indicador fundamental para medir o impacto de um influenciador. As técnicas de regressão linear são usadas para entender as relações entre variáveis e prever a taxa de engajamento com base em dados históricos.
 
 ### Conjunto de Dados
+LINK DADOS: https://archive.ics.uci.edu/dataset/240/human+activity+recognition+using+smartphones
 
 O conjunto de dados utilizado neste projeto contém as seguintes variáveis:
 - **rank:** Rank do influenciador.
